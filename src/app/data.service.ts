@@ -20,7 +20,7 @@ export class DataService {
 
    DataObservable: Observable<any>;
   // UserObservable : Observable<any>;
-  
+
   budgetCollection : AngularFirestoreCollection<BudgetSchema>;
   budgetData: Observable<BudgetSchema[]>;
 
@@ -38,20 +38,20 @@ export class DataService {
   logouthandler = true;
   loggedInUserName : any;
 
-  constructor(private http: HttpClient,public router: Router,public toastr:ToastrService) { 
+  constructor(private http: HttpClient,public router: Router,public toastr:ToastrService) {
     this.isOpenModel.next(false);
   }
-  // An if-else statment where we are populating an Observable and checking it before out API call. 
+  // An if-else statment where we are populating an Observable and checking it before out API call.
   // If it's empty only then call to API is made.
   // If not then data is read from the Observable.
   // tslint:disable-next-line: typedef
-    getBudgetData(username): Observable<any> {      
-        const token = localStorage.getItem('accessToken');            
+    getBudgetData(username): Observable<any> {
+        const token = localStorage.getItem('accessToken');
         const body=JSON.stringify(username);
-        const headers = {'content-type': 'application/json','Authorization' : `Bearer ${token}`};       
-        this.DataObservable = this.http.get('https://personal-budget-backend.herokuapp.com/budget',{ headers: headers,params:{userid : username }}).pipe(shareReplay());
+        const headers = {'content-type': 'application/json','Authorization' : `Bearer ${token}`};
+        this.DataObservable = this.http.get('https://personal-budget-backend-heroku-d6b721ea29c1.herokuapp.com/budget',{ headers: headers,params:{userid : username }}).pipe(shareReplay());
         //this.DataObservable = this.http.get('http://localhost:3000/budget',{ headers: headers }).pipe(shareReplay());
-        return this.DataObservable;      
+        return this.DataObservable;
     }
 
     addBudgetdata(data:BudgetSchema){
@@ -59,16 +59,16 @@ export class DataService {
       const headers = {'content-type': 'application/json','Authorization' : `Bearer ${token}`};
       const body=JSON.stringify(data);
       console.log(body)
-      return this.http.post('https://personal-budget-backend.herokuapp.com/budget',body,{'headers':headers});
+      return this.http.post('https://personal-budget-backend-heroku-d6b721ea29c1.herokuapp.com/budget',body,{'headers':headers});
       //return this.http.post('http://localhost:3000/budget',body,{'headers':headers});
     }
 
-    addFeedbackData(data:FeedbackSchema){   
-      const token = localStorage.getItem('accessToken');   
+    addFeedbackData(data:FeedbackSchema){
+      const token = localStorage.getItem('accessToken');
       const headers = {'content-type': 'application/json','Authorization' : `Bearer ${token}`};
       const body=JSON.stringify(data);
       console.log(body)
-      return this.http.post('https://personal-budget-backend.herokuapp.com/feedback',body,{'headers':headers});
+      return this.http.post('https://personal-budget-backend-heroku-d6b721ea29c1.herokuapp.com/feedback',body,{'headers':headers});
       //return this.http.post('http://localhost:3000/feedback',body,{'headers':headers});
     }
 
@@ -76,7 +76,7 @@ export class DataService {
       const headers = {'content-type': 'application/json'};
       const body=JSON.stringify(data);
       console.log(body)
-      return this.http.post('https://personal-budget-backend.herokuapp.com/users',body,{'headers':headers});
+      return this.http.post('https://personal-budget-backend-heroku-d6b721ea29c1.herokuapp.com/users',body,{'headers':headers});
     }
 
     invaliduser(){
@@ -87,27 +87,27 @@ export class DataService {
       const headers = {'content-type': 'application/json'};
       const body=JSON.stringify(data);
       console.log(body)
-      // return this.http.post('https://personal-budget-backend.herokuapp.com/auth',body,{'headers':headers}).subscribe((res:any)=>{
-        return this.http.post('https://personal-budget-backend.herokuapp.com/auth/',body,{'headers':headers}).subscribe((res:any)=>{
-        console.log(res);       
+      // return this.http.post('https://personal-budget-backend-heroku-d6b721ea29c1.herokuapp.com/auth',body,{'headers':headers}).subscribe((res:any)=>{
+        return this.http.post('https://personal-budget-backend-heroku-d6b721ea29c1.herokuapp.com/auth/',body,{'headers':headers}).subscribe((res:any)=>{
+        console.log(res);
         this.userRecord['username'] = data.username;
         this.userRecord['password'] = data.password;
         console.log("user record is "+JSON.stringify(this.userRecord));
         this.loggedInUserName = data.username;
-        localStorage.setItem('accessToken',res.token);                
-            localStorage.setItem('exp',res.exp);                 
-            this.isUserLoggedIn.next(true); 
-            this.router.navigate(['/homepage']);            
+        localStorage.setItem('accessToken',res.token);
+            localStorage.setItem('exp',res.exp);
+            this.isUserLoggedIn.next(true);
+            this.router.navigate(['/homepage']);
             this.setTimer(true);
           },err=>{
               this.invaliduser();
           })
-      }    
+      }
 
       successfulLogout(){
         this.toastr.success("You have logged out successfully","Goodbye!");
       }
-    
+
       public setTimer(flag){
         console.log("Timer set");
         if (flag){
@@ -119,8 +119,8 @@ export class DataService {
             const lessThanTwentySecRemaining = expdate.valueOf() - new Date().valueOf() <= 25000;
             console.log(expdate.valueOf()+" "+new Date().valueOf());
             console.log(lessThanTwentySecRemaining+" "+TokenNotExpired+" "+this.logouthandler);
-            
-            if (TokenNotExpired && lessThanTwentySecRemaining && this.logouthandler) {                                        
+
+            if (TokenNotExpired && lessThanTwentySecRemaining && this.logouthandler) {
               let message = confirm(
                 'Your session is going to expire in a few seconds! click OK to extend the session!'
               );
@@ -137,9 +137,9 @@ export class DataService {
                 message = false;
                 this.logouthandler = false;
               }
-            }                         
+            }
             if (new Date().valueOf() >= expdate.valueOf()){
-              clearInterval(this.timerId);           
+              clearInterval(this.timerId);
               this.logout();
               this.successfulLogout();
               console.log('clear interval');
@@ -154,7 +154,7 @@ export class DataService {
     public logout(): void {
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
-      localStorage.removeItem('exp');   
+      localStorage.removeItem('exp');
       this.loggedInUserName = "";
       this.isUserLoggedIn.next(false);
       this.router.navigate(['/login']);
@@ -162,7 +162,7 @@ export class DataService {
 
     public getLoginStatus(): Observable<boolean> {
       return this.isUserLoggedIn;
-    }    
+    }
 
     verifyTokenPresence(){
       return !!localStorage.getItem('token');
@@ -189,7 +189,7 @@ export class DataService {
 
 
   // }
-    
+
   // getData(){
   //   return this.budgetData;
   // }
@@ -201,7 +201,7 @@ export class DataService {
   // getUserData(){
   //   return this.userData;
   // }
-  
+
   // createNewFeedBack(record){
   //   return this.afs.collection('feedback').add(record);
   // }
@@ -213,16 +213,16 @@ export class DataService {
   // addNewUser(record){
   //   return this.afs.collection('users').add(record);
   // }
-  
-
-  
 
 
- 
 
-  
 
-  
+
+
+
+
+
+
 
   // getUsers() : Observable<any>{
   //   // if(this.UserObservable){
