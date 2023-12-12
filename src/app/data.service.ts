@@ -88,7 +88,7 @@ export class DataService {
       const body=JSON.stringify(data);
       console.log(body)
       // return this.http.post('https://personal-budget-backend-heroku-d6b721ea29c1.herokuapp.com/auth',body,{'headers':headers}).subscribe((res:any)=>{
-        return this.http.post('https://personal-budget-backend-heroku-d6b721ea29c1.herokuapp.com/auth/',body,{'headers':headers}).subscribe((res:any)=>{
+        return this.http.post('https://personal-budget-backend-heroku-d6b721ea29c1.herokuapp.com/auth',body,{'headers':headers}).subscribe((res:any)=>{
         console.log(res);
         this.userRecord['username'] = data.username;
         this.userRecord['password'] = data.password;
