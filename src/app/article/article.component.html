@@ -1,0 +1,14 @@
+<!-- <article>
+    <h1>{{title}}</h1>
+    <p>{{content}}</p>
+    <ng-content></ng-content>
+</article> -->
+
+<article>
+    
+        <ng-content select="h1"></ng-content>
+    
+    <p>
+        <ng-content select="div"></ng-content>
+    </p>
+</article>

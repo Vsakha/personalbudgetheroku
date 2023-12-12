@@ -1,0 +1,21 @@
+<h1>Budget Distirbution</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>Category</th>
+            <th>Budget</th>
+            <th>Maximum Allotment</th> 
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of data">
+            <td>{{data.indexOf(user)+1}}</td>
+            <td>{{user.title}}</td>
+            <td>{{user.budget}}</td>
+            <td>{{user.maxbudget}}</td>
+        </tr>
+    </tbody>
+</table>
+

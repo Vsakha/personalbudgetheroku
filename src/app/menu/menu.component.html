@@ -1,0 +1,10 @@
+<nav>
+    <ul>
+        
+        <li *ngIf="isUserLoggedIn"><a [routerLink]="['/homepage']" title="Visit our HomePage">HomePage</a></li>        
+        <li><a [routerLink]="['/about']" tabindex=-1 title="Visit the About Page">About</a></li>
+        <li *ngIf="!isUserLoggedIn"><a [routerLink]="['/login']" tabindex=-1 title="Login to Your Account">Login</a></li>  
+        <li *ngIf="isUserLoggedIn"><a [routerLink]="['/contact']" tabindex=-1 title="You can Contact US">Contact</a></li>  
+        <li *ngIf="isUserLoggedIn"><a [routerLink]="['/logout']"  title="You can Logout Here" (click)="logoutUser()">Logout</a></li>       
+    </ul>
+</nav>

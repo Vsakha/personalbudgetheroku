@@ -1,0 +1,33 @@
+<div class="container" id="main">
+    <div class="row">
+        <h1 id="signup">Signup To enjoy the benefits of our Budget management application</h1>
+    </div>
+    <div id ="content">
+        <section>
+            <h2>Enter you details here</h2>
+            <form #simpleform="ngForm">
+            <div class="row col-xs-4">
+                <label for="username">Username: </label>
+                <input type="text" [(ngModel)]="username" name="username" id="username">            
+            </div>
+            <br>
+            <div class="row">
+                <label for="password">Password:  </label>
+                <input type="password" [(ngModel)]="password" name="password" id="password">            
+            </div>
+            <br>
+            <div>
+                <label for="email"> Email ID:   </label>          
+                <input type="email" [(ngModel)]="email" name="email" id="email">
+            </div>
+            <br>
+            <div>
+                <button (click)="duplicateCheck()" [disabled] = "">Register</button>
+            </div>
+        </form>
+
+        </section>
+
+</div> 
+<!-- <button (click)="duplicateUserName()">Trigger Toastr</button> -->
+<h1 id="note">We promise not to clutter your email!!</h1>

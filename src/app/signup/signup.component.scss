@@ -1,0 +1,72 @@
+#main {
+  height: fit-content;
+}
+
+#signup {
+  text-align: center;
+  padding: 20px;
+  background-color: violet;
+  color: white;
+  font-family: Helvetica;
+  font-size: 200%;
+}
+
+#content {
+  padding: 80px;
+  margin-left: 20%;
+  display: flex;
+  background-color: #b4c6f0;
+  width: 20%;
+  width: 60%;
+}
+
+h2 {
+  margin-top: 0px;
+  margin-left: 0%;
+}
+
+button {
+  width: 5%;
+  text-align: center;
+  height: 30px;
+  color: white;
+  background-color: #4caf50;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  margin: 5px;
+  border-radius: 4px;
+  position: absolute;
+  padding: 0px;
+}
+
+#note {
+  font-family: Helvetica;
+  padding: 20px;
+  background-color: yellowgreen;
+  text-align: center;
+  color: white;
+}
+
+section {
+  align-items: center;
+  display: block;
+  margin: 0 auto;
+}
+
+label {
+  font-size: large;
+}
+
+#username {
+  width: 80%;
+  height: 23px;
+}
+
+#password {
+  width: 80%;
+  height: 23px;
+}
+
+#email {
+  width: 80%;
+  height: 23px;
+}
